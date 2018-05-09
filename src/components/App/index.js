@@ -23,9 +23,6 @@ export default class App extends Component {
     startClickHandler = () => {
         if (!this.state.intervalId) {
             this.initTimer();
-            this.setState({
-                isPrizeVisible: false
-            });
         }
     }
 
@@ -42,23 +39,30 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             this.initTimer();
         }, delayAutoStart);
+        this.setState({timeoutId: timeoutId});
     }
 
     componentWillUnmount() {
         clearInterval(this.state.intervalId);
+        clearTimeout(this.state.timeoutId);
     }
 
     initTimer() {
-        var intervalId = setInterval(() => {
+        clearTimeout(this.state.timeoutId);
+        const intervalId = setInterval(() => {
             this.setState({iteration: ++this.state.iteration});
         }, tick);
-        this.setState({intervalId: intervalId});
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             this.stop();
         }, delayAutoStop);
+        this.setState({
+            intervalId: intervalId,
+            timeoutId: timeoutId,
+            isPrizeVisible: false
+        });
     }
 
     setNewCard = (card, index) => {
