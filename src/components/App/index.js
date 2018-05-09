@@ -1,0 +1,80 @@
+import React, { Component, PropTypes } from 'react';
+import Controls from '../Controls';
+import Slots from '../Slots';
+import Prize from '../Prize';
+
+const delayAutoStart = 5000;
+const delayAutoStop = 10000;
+const tick = 50;
+const slotsNumber = 3;
+
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            intervalId: null,
+            isPrizeVisible: false,
+            iteration: 0,
+            cards: []
+        }
+    }
+
+    startClickHandler = () => {
+        if (!this.state.intervalId) {
+            this.initTimer();
+            this.setState({
+                isPrizeVisible: false
+            });
+        }
+    }
+
+    stopClickHandler = () => {
+        this.stop();
+    }
+
+    stop() {
+        clearInterval(this.state.intervalId);
+        this.setState({
+            isPrizeVisible: true,
+            intervalId: null
+        });
+    }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.initTimer();
+        }, delayAutoStart);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId);
+    }
+
+    initTimer() {
+        var intervalId = setInterval(() => {
+            this.setState({iteration: ++this.state.iteration});
+        }, tick);
+        this.setState({intervalId: intervalId});
+        setTimeout(() => {
+            this.stop();
+        }, delayAutoStop);
+    }
+
+    setNewCard = (card, index) => {
+        const updatedCards = this.state.cards;
+
+        updatedCards[index] = card;
+        this.setState({cards: updatedCards});
+    }
+
+    render() {
+        const contrilsMethods = {startClickHandler: this.startClickHandler, stopClickHandler: this.stopClickHandler};
+
+        return <div>
+            <Controls methods={contrilsMethods} />
+            <Slots setNewCard={this.setNewCard} iteration={this.state.iteration} slotsNumber={slotsNumber} />
+            {this.state.isPrizeVisible ? <Prize cards={this.state.cards}/> : null}
+        </div>
+    }
+}
