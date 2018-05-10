@@ -14,11 +14,15 @@ module.exports = {
     module: {
         loaders: [
             {
-                loaders: ['babel-loader'],
+                loaders: 'babel-loader',
                 include: [
                     path.resolve(__dirname, "src"),
                 ],
                 test: /\.js$/
+            },
+            {   
+                loader: "style-loader!css-loader",
+                test: /\.css$/
             }
         ]
     }

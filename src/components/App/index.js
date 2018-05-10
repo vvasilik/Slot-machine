@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Controls from '../Controls';
 import Slots from '../Slots';
 import Prize from '../Prize';
+import './style.css';
 
 const delayAutoStart = 5000;
 const delayAutoStop = 10000;

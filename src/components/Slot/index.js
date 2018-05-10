@@ -1,23 +1,24 @@
 import React, { Component, PropTypes } from 'react';
 import Card from '../Card';
 import { log } from 'util';
+import './style.css';
 
 const cards = [
     {
         type: 'strawberry',
-        title: 'S'
+        img: './src/images/strawberry.jpg'
     },
     {
         type: 'banana',
-        title: 'B'
+        img: './src/images/banana.jpg'
     },
     {
         type: 'orange',
-        title: 'O'
+        img: './src/images/orange.jpg'
     },
     {
-        type: 'monke',
-        title: 'M'
+        type: 'monkey',
+        img: './src/images/monkey.jpg'
     }
 ];
 
@@ -52,7 +53,7 @@ export default class Slot extends Component {
     }
 
     render() {
-        return <li>
+        return <li className="slot">
             <Card currentCard={this.state.currentCard}/>
         </li>
     }

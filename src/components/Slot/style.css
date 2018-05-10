@@ -1,0 +1,8 @@
+.slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: calc(100% / 3);
+    height: 300px;
+}
