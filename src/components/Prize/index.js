@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Slot from '../Slot';
 
 export default class Prize extends Component {

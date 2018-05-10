@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Card from '../Card';
 import { log } from 'util';
 import './style.css';
@@ -33,13 +33,13 @@ export default class Slot extends Component {
 
     componentDidMount() {
         this.setState({
-            currentCard: this.getCurrentCard()
+            currentCard: this.getNextCard()
         })
     }
 
     componentWillReceiveProps() {
         if (this.state.iteration !== this.props.iteration) {
-            const card = this.getCurrentCard();
+            const card = this.getNextCard();
             this.setState({
                 currentCard: card,
                 iteration: this.props.iteration
@@ -48,7 +48,7 @@ export default class Slot extends Component {
         }
     }
 
-    getCurrentCard() {
+    getNextCard() {
         return cards[Math.floor(Math.random() * (cards.length - 0))];
     }
 

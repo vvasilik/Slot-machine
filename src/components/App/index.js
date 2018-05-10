@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Controls from '../Controls';
 import Slots from '../Slots';
 import Prize from '../Prize';
