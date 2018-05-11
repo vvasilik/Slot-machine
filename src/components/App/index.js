@@ -74,10 +74,10 @@ export default class App extends Component {
     }
 
     render() {
-        const contrilsMethods = {startClickHandler: this.startClickHandler, stopClickHandler: this.stopClickHandler};
+        const controlsMethods = {startClickHandler: this.startClickHandler, stopClickHandler: this.stopClickHandler};
 
         return <div>
-            <Controls methods={contrilsMethods} />
+            <Controls methods={controlsMethods} />
             <Slots setNewCard={this.setNewCard} iteration={this.state.iteration} slotsNumber={slotsNumber} />
             {this.state.isPrizeVisible ? <Prize cards={this.state.cards}/> : null}
         </div>

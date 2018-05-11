@@ -5,10 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack -w",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./src/setupTests.js"
+    "setupTestFrameworkScriptFile": "./src/setupTests.js",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./src/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   },
   "author": "Vasiliy",
   "license": "MIT",
@@ -24,8 +29,10 @@
     "css-loader": "^0.28.11",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^22.4.3",
     "react-test-renderer": "^16.3.2",
+    "sinon": "^5.0.7",
     "style-loader": "^0.21.0",
     "webpack": "^2.3.1"
   },
