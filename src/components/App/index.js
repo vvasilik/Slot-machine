@@ -15,6 +15,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             intervalId: null,
+            timeoutId: null,
             isPrizeVisible: false,
             iteration: 0,
             cards: []
@@ -32,17 +33,17 @@ export default class App extends Component {
     }
 
     stop() {
-        clearInterval(this.state.intervalId);
-        this.setState({
-            isPrizeVisible: true,
-            intervalId: null
-        });
+		if (this.state.iteration !== 0) {
+			clearInterval(this.state.intervalId);
+			this.setState({
+				isPrizeVisible: true,
+				intervalId: null
+			});	
+		}
     }
 
     componentDidMount() {
-        const timeoutId = setTimeout(() => {
-            this.initTimer();
-        }, delayAutoStart);
+        const timeoutId = setTimeout(this.initTimer.bind(this), delayAutoStart);
         this.setState({timeoutId: timeoutId});
     }
 
@@ -53,28 +54,31 @@ export default class App extends Component {
 
     initTimer() {
         clearTimeout(this.state.timeoutId);
-        const intervalId = setInterval(() => {
-            this.setState({iteration: ++this.state.iteration});
-        }, tick);
-        const timeoutId = setTimeout(() => {
-            this.stop();
-        }, delayAutoStop);
+        const intervalId = setInterval(this.increaseIteration.bind(this), tick);
+        const timeoutId = setTimeout(this.stop.bind(this), delayAutoStop);
         this.setState({
             intervalId: intervalId,
             timeoutId: timeoutId,
             isPrizeVisible: false
         });
-    }
+	}
+	
+	increaseIteration() {
+		this.setState({iteration: ++this.state.iteration});
+	}
 
     setNewCard = (card, index) => {
-        const updatedCards = this.state.cards;
+        const cards = this.state.cards;
 
-        updatedCards[index] = card;
-        this.setState({cards: updatedCards});
+        cards[index] = card;
+        this.setState({cards: cards});
     }
 
     render() {
-        const controlsMethods = {startClickHandler: this.startClickHandler, stopClickHandler: this.stopClickHandler};
+        const controlsMethods = {
+			startClickHandler: this.startClickHandler,
+			stopClickHandler: this.stopClickHandler
+		};
 
         return <div>
             <Controls methods={controlsMethods} />

@@ -82,10 +82,27 @@ describe('StartClickHandler', () => {
 });
 
 describe('Stop', () => {
-	it('Should update state on stop', () => {
+	it('Should update state on stop if it is not first iteration', () => {
 		const app = shallow(<App />);
 		const spy = jest.spyOn(App.prototype, 'setState');
 
+		app.setState({
+			iteration: 1
+		})
+		app.instance().stop();
+		expect(spy).toBeCalledWith({
+			isPrizeVisible: true,
+            intervalId: null
+		});
+	});
+
+	it('Should not update state on stop if it is first iteration', () => {
+		const app = shallow(<App />);
+		const spy = jest.spyOn(App.prototype, 'setState');
+
+		app.setState({
+			iteration: 0
+		})
 		app.instance().stop();
 		expect(spy).toBeCalledWith({
 			isPrizeVisible: true,
@@ -181,6 +198,16 @@ describe('SetNewCard', () => {
 		const spy = jest.spyOn(App.prototype, 'setState');
 
 		app.instance().setNewCard();
+		expect(spy).toBeCalled();
+	});
+});
+
+describe('IncreaseIteration', () => {
+	it('Should run setState on increaseIteration', () => {
+		const app = shallow(<App />);
+		const spy = jest.spyOn(App.prototype, 'setState');
+
+		app.instance().increaseIteration();
 		expect(spy).toBeCalled();
 	});
 });
