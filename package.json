@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -w",
+    "build": "webpack",
+    "dev": "webpack -w | webpack-dev-server",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
@@ -18,9 +19,10 @@
   "author": "Vasiliy",
   "license": "MIT",
   "devDependencies": {
+    "babel": "^6.23.0",
     "babel-core": "^6.24.0",
     "babel-jest": "^22.4.3",
-    "babel-loader": "^6.4.1",
+    "babel-loader": "^7.1.4",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.0",
@@ -34,10 +36,12 @@
     "react-test-renderer": "^16.3.2",
     "sinon": "^5.0.7",
     "style-loader": "^0.21.0",
-    "webpack": "^2.3.1"
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
-    "babel-polyfill": "^6.3.14",
+    "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.3.19",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",

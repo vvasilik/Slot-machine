@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
+	mode: 'none',
     devtool: 'cheap-module-eval-source-map',
     entry: [
         'babel-polyfill',
@@ -12,7 +13,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 loaders: 'babel-loader',
                 include: [
