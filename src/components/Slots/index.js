@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Slot from '../Slot';
 import './style.css';
 
@@ -14,4 +15,10 @@ export default class Slots extends Component {
             {slotsList}
         </ul>
     }
+}
+
+Slots.propTypes = {
+	slotsNumber: PropTypes.number,
+	iteration: PropTypes.number,
+	setNewCard: PropTypes.func
 }

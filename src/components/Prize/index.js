@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Slot from '../Slot';
 
 export default class Prize extends Component {
@@ -18,4 +19,8 @@ export default class Prize extends Component {
 
         return <p>You win {prize}$</p>
     }
+}
+
+Prize.propTypes = {
+	cards: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
 }

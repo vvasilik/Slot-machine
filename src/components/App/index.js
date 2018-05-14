@@ -11,16 +11,13 @@ const slotsNumber = 3;
 
 
 export default class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            intervalId: null,
-            timeoutId: null,
-            isPrizeVisible: false,
-            iteration: 0,
-            cards: []
-        }
-    }
+    state = {
+		intervalId: null,
+		timeoutId: null,
+		isPrizeVisible: false,
+		iteration: 0,
+		cards: []
+	}
 
     startClickHandler = () => {
         if (!this.state.intervalId) {

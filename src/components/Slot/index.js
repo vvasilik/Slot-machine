@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Card from '../Card';
 import { log } from 'util';
 import './style.css';
@@ -23,33 +24,24 @@ const cards = [
 ];
 
 export default class Slot extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentCard: null,
-            iteration: 0
-        }
-    }
+    state = {
+		currentCard: cards[Math.floor(Math.random() * cards.length)],
+		iteration: 0
+	}
 
-    componentDidMount() {
-        this.setState({
-            currentCard: this.getNextCard()
-        })
-    }
+    static getDerivedStateFromProps(nextProps, prevState) {
+        if (nextProps.iteration !== prevState.iteration) {
+			const card = cards[Math.floor(Math.random() * cards.length)];
+			
+			nextProps.setNewCard(card, nextProps.index);
 
-    componentWillReceiveProps() {
-        if (this.state.iteration !== this.props.iteration) {
-            const card = this.getNextCard();
-            this.setState({
+			return {
                 currentCard: card,
-                iteration: this.props.iteration
-            })
-            this.props.setNewCard(card, this.props.index);
-        }
-    }
-
-    getNextCard() {
-        return cards[Math.floor(Math.random() * (cards.length - 0))];
+                iteration: nextProps.iteration
+            }
+		}
+		
+		return null;
     }
 
     render() {
@@ -57,4 +49,8 @@ export default class Slot extends Component {
             <Card currentCard={this.state.currentCard}/>
         </li>
     }
+}
+
+Slot.propTypes = {
+	iteration: PropTypes.number
 }

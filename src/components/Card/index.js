@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './style.css';
 
-export default props => {
+const Card = props => {
     return <div className="card">
         {
 			props.currentCard
@@ -10,3 +11,9 @@ export default props => {
 		}
     </div>
 }
+
+Card.propTypes = {
+	currentCard: PropTypes.objectOf(PropTypes.string)
+}
+
+export default Card;
