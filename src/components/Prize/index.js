@@ -21,6 +21,10 @@ export default class Prize extends Component {
     }
 }
 
+Prize.defaultProps = {
+	cards: []
+}
+
 Prize.propTypes = {
 	cards: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string))
 }
